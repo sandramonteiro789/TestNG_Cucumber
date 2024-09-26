@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+
+		<!-- Console Appender -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p [Scenario:%X{scenarioName}] [Browser: Edge] %c{1} - %m%n" />
+		</Console>
+		
+		<!-- Define a rolling file appender for Chrome -->
+		<RollingFile name="ChromeAppender"
+			fileName="logs/chrome-test-log.log"
+			filePattern="logs/chrome-test-log-%d{MM-dd-yyyy}.log.gz">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [Scenario: %X{scenarioName}] [Browser: Chrome] %c{1} - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+
+		<!-- Define a rolling file appender for Firefox -->
+		<RollingFile name="FirefoxAppender"
+			fileName="logs/firefox-test-log.log"
+			filePattern="logs/firefox-test-log-%d{MM-dd-yyyy}.log.gz">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p [Scenario:%X{scenarioName}] [Browser: Firefox] %c{1} - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+
+		<RollingFile name="EdgeAppender"
+			fileName="logs/edge-test-log.log"
+			filePattern="logs/edge-test-log-%d{MM-dd-yyyy}.log.gz">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p [Scenario:%X{scenarioName}] [Browser: Edge] %c{1} - %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+
+		<!-- Add more appenders for other browsers as needed -->
+	</Appenders>
+
+	<Loggers>
+		<!-- Define a logger for each appender -->
+<!-- 		<Logger name="ChromeLogger" level="info" additivity="false">
+			<AppenderRef ref="ChromeAppender" />
+		</Logger>
+		<Logger name="FirefoxLogger" level="info" additivity="false">
+			<AppenderRef ref="FirefoxAppender" />
+		</Logger>
+		<Logger name="EdgeLogger" level="info" additivity="false">
+			<AppenderRef ref="EdgeAppender" />
+		</Logger> -->
+		<!-- Add more loggers for other browsers as needed -->
+
+		<Root level="info">
+			<AppenderRef ref="ChromeAppender" />
+			<AppenderRef ref="FirefoxAppender" />
+			<AppenderRef ref="EdgeAppender" />
+			<AppenderRef ref="Console" />
+			<!-- Reference other appenders as needed -->
+		</Root>
+	</Loggers>
+</Configuration>
