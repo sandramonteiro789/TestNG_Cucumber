@@ -1,69 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="INFO">
+<Properties>
+<Property name="log-pattern">%d{yyyy-MMM-dd HH:mm:ss} %-5p [Scenario: %X{scenarioName}] [Browser: %X{browser}] %c{1} - %m%n</Property>
+</Properties>
 	<Appenders>
-
 		<!-- Console Appender -->
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p [Scenario:%X{scenarioName}] [Browser: Edge] %c{1} - %m%n" />
+			<PatternLayout pattern="${log-pattern}" />
 		</Console>
-		
-		<!-- Define a rolling file appender for Chrome -->
-		<RollingFile name="ChromeAppender"
-			fileName="logs/chrome-test-log.log"
-			filePattern="logs/chrome-test-log-%d{MM-dd-yyyy}.log.gz">
-			<PatternLayout>
-				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [Scenario: %X{scenarioName}] [Browser: Chrome] %c{1} - %m%n</Pattern>
-			</PatternLayout>
-			<Policies>
-				<TimeBasedTriggeringPolicy />
-			</Policies>
-		</RollingFile>
 
-		<!-- Define a rolling file appender for Firefox -->
-		<RollingFile name="FirefoxAppender"
-			fileName="logs/firefox-test-log.log"
-			filePattern="logs/firefox-test-log-%d{MM-dd-yyyy}.log.gz">
-			<PatternLayout>
-				<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p [Scenario:%X{scenarioName}] [Browser: Firefox] %c{1} - %m%n</Pattern>
-			</PatternLayout>
+		<!-- Rolling File Appender -->
+		<RollingFile name="RollingFile" fileName="logs/app.log"
+			filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+			<PatternLayout pattern="${log-pattern}" />
 			<Policies>
-				<TimeBasedTriggeringPolicy />
+				<TimeBasedTriggeringPolicy interval="1" modulate="true" />
+				<SizeBasedTriggeringPolicy size="10MB" />
 			</Policies>
+			<DefaultRolloverStrategy max="10" />
 		</RollingFile>
-
-		<RollingFile name="EdgeAppender"
-			fileName="logs/edge-test-log.log"
-			filePattern="logs/edge-test-log-%d{MM-dd-yyyy}.log.gz">
-			<PatternLayout>
-				<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p [Scenario:%X{scenarioName}] [Browser: Edge] %c{1} - %m%n</Pattern>
-			</PatternLayout>
-			<Policies>
-				<TimeBasedTriggeringPolicy />
-			</Policies>
-		</RollingFile>
-
-		<!-- Add more appenders for other browsers as needed -->
 	</Appenders>
 
 	<Loggers>
-		<!-- Define a logger for each appender -->
-<!-- 		<Logger name="ChromeLogger" level="info" additivity="false">
-			<AppenderRef ref="ChromeAppender" />
-		</Logger>
-		<Logger name="FirefoxLogger" level="info" additivity="false">
-			<AppenderRef ref="FirefoxAppender" />
-		</Logger>
-		<Logger name="EdgeLogger" level="info" additivity="false">
-			<AppenderRef ref="EdgeAppender" />
-		</Logger> -->
-		<!-- Add more loggers for other browsers as needed -->
-
-		<Root level="info">
-			<AppenderRef ref="ChromeAppender" />
-			<AppenderRef ref="FirefoxAppender" />
-			<AppenderRef ref="EdgeAppender" />
+		<Root level="INFO">
 			<AppenderRef ref="Console" />
-			<!-- Reference other appenders as needed -->
+			<AppenderRef ref="RollingFile" />
 		</Root>
 	</Loggers>
 </Configuration>

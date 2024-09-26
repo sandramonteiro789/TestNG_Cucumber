@@ -32,7 +32,7 @@ public class BaseClass {
         driver.set(webDriver);
     }
 
-    // Initialize WebDriver based on browser type (you can customize this)
+    // Initialize WebDriver based on browser type
     public static void initializeDriver(String browserParam) {
         WebDriver webDriver = null;
 
