@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.OutputType;
@@ -23,6 +24,7 @@ public class hooks extends BaseClass {
 
 		//Initialize WebDriver before each scenario according to browser in property file
 		BaseClass.initializeDriver(browser);
+		BaseClass.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		BaseClass.getDriver().manage().window().maximize();
 
 	}

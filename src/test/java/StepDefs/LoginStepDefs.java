@@ -28,7 +28,7 @@ public class LoginStepDefs extends BaseClass {
 		driver.get(confReader.getApplicationUrl()); // reading URL from properties file.
 		driver.manage().window().maximize();
 		String actualTitle=driver.getTitle();
-		String expectedTitle=excel.getCellData("login", 0, 1);
+		String expectedTitle=excel.getCellData("login", "homePageTitle");
 		Assert.assertEquals(actualTitle, expectedTitle);
 		log.info("User has directed to Parabank home page");
 	}
@@ -38,7 +38,7 @@ public class LoginStepDefs extends BaseClass {
 	    
 		driver.findElement(HomePage.registerLink).click();
 		String actualTitle=driver.getTitle();
-		String expectedTitle=excel.getCellData("login", 1, 1);
+		String expectedTitle=excel.getCellData("login", "registrationPageTitle");
 		Assert.assertEquals(actualTitle, expectedTitle);
 		log.info("User has directed to Parabank registration page");
 	}
