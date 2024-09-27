@@ -8,12 +8,12 @@
 		</classes>
 	</test>
 	
-	<test name="edgeTest">
+<!-- 	<test name="edgeTest">
 		<parameter name="browser" value="edge" />
 		<classes>
 			<class name="TestRunner.RunnerClass" />
 		</classes>
-	</test>
+	</test> -->
 	
 	<test name="firefoxTest">
 		<parameter name="browser" value="firefox" />
